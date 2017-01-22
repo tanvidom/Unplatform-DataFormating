@@ -1,0 +1,6 @@
+Unplatfrom-DataFomrating is a script which will be used for formatting the data that is extracted by the Unplatform data extraction script.
+
+For formatting the data we will be using a python script. The idea for formating the data is to parse all the json files recieved from the school 
+using python json module and then extracting the required fields from this json files nd writing this feilds to a csv in a tubulated 2D form.
+
+
