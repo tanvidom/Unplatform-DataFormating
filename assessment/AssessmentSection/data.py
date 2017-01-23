@@ -44,5 +44,5 @@ for r in data ["questions"]:
 		mergedn.append(ResponsesMR)
 #		print mergedn
 #		merged =[f,AssessmentTakenID,AssessmentpartID,ItemID,QuestionID,ResponsesMR,ResponsesItemID]
-		writer = csv.writer(mergedncsv)
-		writer.writerow(mergedn)
+writer = csv.writer(mergedncsv)
+writer.writerow(mergedn)
