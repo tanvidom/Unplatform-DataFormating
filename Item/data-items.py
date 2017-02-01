@@ -17,7 +17,7 @@ for files in glob.glob("*.json"):
 		data1 = json.load(f)
 	except:
 		print "error"	
-# ------------ this portion looks for the question item id and is shuffle --------------------------------	
+# ------------ this portion looks for the question item id and if is shuffle or no --------------------------------	
 	try:
 		# this variable is taking the question item id
 		questionITEMIDU = data1["question"]["itemId"]
@@ -25,13 +25,13 @@ for files in glob.glob("*.json"):
 		# this variable is taking the the question_shuffle
 		SHUFFLE= data1["question"]["shuffle"]
 		list1.append(questionITEMID[0])
-		list1.append(SHUFFLE)
-		#this if condition and loop is added for checking if the question text feild exist and if exsist the loop through it and get the content and append it to the list
+		list1.append(SHUFFLE)		
 	except:
 		pass
 #------------- this portion looks for the question text and its record type ------------------------------
 	try:
 		dict=data1["question"]
+#this if condition and loop is added for checking if the question text feild exist and if exsist the loop through it and get the content and append it to the list
 		if 'texts' in dict.keys():
 			for j in data1["question"]["texts"]:	
 				questiontext=re.sub(r'<.*?>','',j["text"])
@@ -44,7 +44,6 @@ for files in glob.glob("*.json"):
 			list1.append(QuestionRecordTypesID[0])	
 	except:
 		pass
-
 #------------- This portion looks fot the choice response id and text and appents it to list1 ------------	
 	try:
 		if 'choices' in dict.keys():
@@ -53,9 +52,9 @@ for files in glob.glob("*.json"):
 				list1.append(questionchoiceresponseid)
 #				if "texts" in "choices":---not working--
 				for t in c["texts"]:
-					text1=t["text"]
-					test=re.sub(r'<.*?>','',text1)
-					list1.append(test.encode('utf-8'))
+					choices=t["text"]
+					choicestext=re.sub(r'<.*?>','',choices)
+					list1.append(choicestext.encode('utf-8'))
 #				else:-----------not working----------
 #					list1.append("null")
 		else:
