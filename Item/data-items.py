@@ -4,6 +4,15 @@ import re
 import csv
 import glob
 import pdb
+
+print 'Enter the school code:'
+schoolname = raw_input()
+print 'Enter the name of district:'
+district = raw_input()
+print 'Enter the name of the state'
+state = raw_input()
+filename = schoolname +'-'+ district +'-'+ state
+print filename
 os.chdir("./")
 for files in glob.glob("*.json"):
 	file = files
@@ -11,7 +20,7 @@ for files in glob.glob("*.json"):
 	f=open(file)
 #		f = open("58440994b3fcec051a40ea0c.json")
 	list1=[]
-	csv123 = open('output.csv','a')
+	csv123 = open(filename+'.csv','a')
 	try:
 		list1.append(file)
 		data1 = json.load(f)
@@ -36,6 +45,9 @@ for files in glob.glob("*.json"):
 			for j in data1["question"]["texts"]:	
 				questiontext=re.sub(r'<.*?>','',j["text"])
 				list1.append(questiontext.encode('utf-8'))
+		elif 'text' in dict.keys():
+			QTinlinechoice = data1["question"]["text"]["text"]
+			list1.append(re.sub(r'<.*?>','',QTinlinechoice))
 		else :
 			list1.append("question text null")
 		# this loop takes recordtypesids
@@ -50,17 +62,19 @@ for files in glob.glob("*.json"):
 			for c in data1["question"]["choices"]:
 				questionchoiceresponseid=c["id"]
 				list1.append(questionchoiceresponseid)
-#				if "texts" in "choices":---not working--
+#				if "texts" in "choices":
 				for t in c["texts"]:
 					choices=t["text"]
 					choicestext=re.sub(r'<.*?>','',choices)
 					list1.append(choicestext.encode('utf-8'))
-#				else:-----------not working----------
-#					list1.append("null")
+#				else:
+#					print low
+#					list1.append("null")				
 		else:
 			list1.append("question choice response id null")
 	except: 
 		pass
+		
 #-----------------------------------------------------------------------------------------------------------
 
 #------------ this portion takes the regex verions of question genus type ----------------------------------	
@@ -88,7 +102,7 @@ for files in glob.glob("*.json"):
 #-----------------------------------------------------------------------------------------------------------
 #------------- This portion writes the csv file with the python list1---------------------------------------		
 	writer =csv.writer(csv123)
-	writer.writerow(list1)	
+	writer.writerow(list1)
 #------------------------------------------------------------------------------------------------------------	
 
 
@@ -98,4 +112,4 @@ for files in glob.glob("*.json"):
 	#		for r in data1["answers"]:    
 	#			ans=r["itemId"]
 	#		print list1
-	#		
+	#		`
