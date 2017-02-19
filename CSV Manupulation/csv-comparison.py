@@ -7,19 +7,21 @@ import glob
 import re
 import pdb
 
+#Function to open new json files in different folders, "array" parameter is passed to the function which contains question ID that is to be found in the assessment items folder.
 def cdToItems(array):
 	global itemsData
 	os.chdir("/home/tdnshah/Unplatform-DataFormating/Item")
 	fileName = array
 #	print fileName
 	fileExsist = os.path.isfile(fileName)
-	print fileExsist
+#	print fileExsist
 	if fileExsist == True:
 		itemjsonFile = open(fileName)
 		itemsData = json.load(itemjsonFile)		
 	else:
 		print "no file in the directory"
-	
+#Actual script starts from here 
+#below changing to the directory in which Assessment Section json files are kept	
 os.chdir("../assessment/AssessmentSection/")
 dir_path1 = os.path.dirname(os.path.realpath(__file__))
 print dir_path1
@@ -32,6 +34,7 @@ for files in glob.glob("*.json"):
 	print dir_path2	
 #	opens each json files
 	file = open(files)
+	print file
 #	loads a file to json module
 	data = json.load(file)	
 #	declared a global array
@@ -46,31 +49,58 @@ for files in glob.glob("*.json"):
 	mainArray.append(AssessmentTakenID)
 	mainArray.append(AssessmentpartID)
 	for questions in data ["questions"]:
-		questionsItemIDU =questions["itemId"]
-		questionsItemID = re.findall(r'%3A(.*?)%40',questionsItemIDU,re.I)
-		print str(questionsItemID).strip('[]')
-		questionsIDU =questions["questionId"]
-		questionsID = re.findall(r'%3A(.*?)%40',questionsIDU,re.I)
-#		print os.getcwd()
-#		os.chdir("/home/tdnshah/Unplatform-DataFormating/Item")
-#		dir_path3 = os.path.dirname(os.path.realpath(__file__))
-#		print dir_path3	 
-#		 = questionsID[0]
-#		cd = abc + ".json"
-#		print os.path.isfile(cd)
-		abc = questionsID[0] + '.json'
-		print abc
+		SFquestionsItemIDU =questions["itemId"]
+		SFquestionsItemID = re.findall(r'%3A(.*?)%40',SFquestionsItemIDU,re.I)
+#		print str(questionsItemID).strip('[]')
+		SFquestionsIDU =questions["questionId"]
+		SFquestionsID = re.findall(r'%3A(.*?)%40',SFquestionsIDU,re.I)
+		print SFquestionsID
+#---------------------------the scripts enters into the Items folder after this ------------	
+		abc = SFquestionsID[0] + '.json'
+#		print abc
 		cdToItems(abc)
-		abc = itemsData["recordTypeIds"]
-		print abc
-				  
+#		print itemsData
+#		IFquestionITEMIDU = itemsData["question"]["itemId"]
+#		IFquestionITEMID = re.findall(r'%3A(.*?)%40',IFquestionITEMIDU,re.I)#--------to be added
 
-		
-		
-				
-		
-		
-		
-
-	
-		
+		try:
+			dict=itemsData["question"] 
+			if 'texts' in dict.keys():
+				for j in itemsData["question"]["texts"]:	
+					questiontext=re.sub(r'<.*?>','',j["text"])
+					print questiontext
+#					list1.append(questiontext.encode('utf-8'))#------to be added
+			elif 'text' in dict.keys():
+				QTinlinechoice = itemsData["question"]["text"]["text"]
+#				list1.append(re.sub(r'<.*?>','',QTinlinechoice))-----------to be added
+				print QTinlinechoice
+			else :
+				print "tu to phele se hhi chitua hai"
+#				list1.append("question text null")--------------to be added
+#	 			this loop takes recordtypesids
+#				for i in itemsData["question"]["recordTypeIds"]:
+#					QuestionRecordTypesID = re.findall(r'%3A(.*?)%40',i,re.I)
+#				print QuestionRecordTypesID
+##				list1.append(QuestionRecordTypesID[0])	------------to be added
+		except:
+				print "chituya hai tu"
+		try:
+			if 'choices' in dict.keys():
+				for c in itemsData["question"]["choices"]:
+					questionchoiceresponseid=c["id"]
+					print questionchoiceresponseid
+	#				list1.append(questionchoiceresponseid)
+	#				if "texts" in "choices":
+					for t in c["texts"]:
+						choices=t["text"]
+						choicestext=re.sub(r'<.*?>','',choices)
+						print choicestext
+	#					list1.append(choicestext.encode('utf-8'))
+	#				else:
+	#					print "lowed"
+	#					list1.append("null")				
+			else:
+				print "cancel"
+	#			list1.append("question choice response id null")
+		except:
+			pass
