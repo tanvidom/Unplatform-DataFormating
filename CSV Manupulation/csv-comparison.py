@@ -54,6 +54,7 @@ for files in glob.glob("*.json"):
 #		print str(questionsItemID).strip('[]')
 		SFquestionsIDU =questions["questionId"]
 		SFquestionsID = re.findall(r'%3A(.*?)%40',SFquestionsIDU,re.I)
+		mainArray.append(SFquestionsID)
 		print SFquestionsID
 #---------------------------the scripts enters into the Items folder after this ------------	
 		abc = SFquestionsID[0] + '.json'
@@ -68,39 +69,42 @@ for files in glob.glob("*.json"):
 			if 'texts' in dict.keys():
 				for j in itemsData["question"]["texts"]:	
 					questiontext=re.sub(r'<.*?>','',j["text"])
-					print questiontext
-#					list1.append(questiontext.encode('utf-8'))#------to be added
+#					print questiontext
+					mainArray.append(questiontext.encode('utf-8'))#------to be added
 			elif 'text' in dict.keys():
 				QTinlinechoice = itemsData["question"]["text"]["text"]
-#				list1.append(re.sub(r'<.*?>','',QTinlinechoice))-----------to be added
-				print QTinlinechoice
+				mainArray.append(re.sub(r'<.*?>','',QTinlinechoice))#-----------to be added
+#				print QTinlinechoice
 			else :
-				print "tu to phele se hhi chitua hai"
-#				list1.append("question text null")--------------to be added
+#				print "Question text is null"
+				mainArray.append("question text null")#--------------to be added
 #	 			this loop takes recordtypesids
 #				for i in itemsData["question"]["recordTypeIds"]:
 #					QuestionRecordTypesID = re.findall(r'%3A(.*?)%40',i,re.I)
 #				print QuestionRecordTypesID
-##				list1.append(QuestionRecordTypesID[0])	------------to be added
+#				list1.append(QuestionRecordTypesID[0])	------------to be added
 		except:
-				print "chituya hai tu"
+				print "error level 1"
 		try:
 			if 'choices' in dict.keys():
 				for c in itemsData["question"]["choices"]:
 					questionchoiceresponseid=c["id"]
-					print questionchoiceresponseid
-	#				list1.append(questionchoiceresponseid)
+#					print questionchoiceresponseid
+					mainArray.append(questionchoiceresponseid)
 	#				if "texts" in "choices":
 					for t in c["texts"]:
 						choices=t["text"]
 						choicestext=re.sub(r'<.*?>','',choices)
-						print choicestext
-	#					list1.append(choicestext.encode('utf-8'))
+#						print choicestext
+						mainArray.append(choicestext.encode('utf-8'))
+#						print mainArray
 	#				else:
 	#					print "lowed"
-	#					list1.append("null")				
+#						mainArray.append("null")				
 			else:
-				print "cancel"
-	#			list1.append("question choice response id null")
+				print "didnt found choices"
+#				mainArray.append("question choice response id null")
 		except:
+			print "tried but found choices"
 			pass
+		print mainArray

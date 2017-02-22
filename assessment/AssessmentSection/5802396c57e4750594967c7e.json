@@ -1,1 +1,23 @@
-{"assessmentTakenId": "assessment.AssessmentTaken%3A5802396b57e4750594967c7d%40ODL.MIT.EDU", "recordTypeIds": [], "assessmentParts": [{"assessmentPartId": "assessment_authoring.AssessmentPart%3A57ee5efeb3fcec154609f167%40ODL.MIT.EDU", "requiresSequentialItems": false, "level": 0}], "questions": [{"itemId": "assessment.Item%3A57ee5efeb3fcec154609f163%40ODL.MIT.EDU", "questionId": "assessment.Item%3A57ee5efeb3fcec154609f163%40ODL.MIT.EDU", "responses": [{"itemId": "assessment.Item%3A57ee5efeb3fcec154609f163%40ODL.MIT.EDU", "submissionTime": null, "missingResponse": 0}], "displayElements": [1], "assessmentPartId": "assessment_authoring.AssessmentPart%3A57ee5efeb3fcec154609f167%40ODL.MIT.EDU", "_id": "5802396c57e4750594967c7f"}], "assessmentPartId": "assessment_authoring.AssessmentPart%3A57ee5efeb3fcec154609f167%40ODL.MIT.EDU", "_id": "5802396c57e4750594967c7e"}
+{
+	"assessmentTakenId": "assessment.AssessmentTaken%3A5802396b57e4750594967c7d%40ODL.MIT.EDU",
+	"recordTypeIds": [],
+	"assessmentParts": [{
+		"assessmentPartId": "assessment_authoring.AssessmentPart%3A57ee5efeb3fcec154609f167%40ODL.MIT.EDU",
+		"requiresSequentialItems": false,
+		"level": 0
+	}],
+	"questions": [{
+		"itemId": "assessment.Item%3A57ee5efeb3fcec154609f163%40ODL.MIT.EDU",
+		"questionId": "assessment.Item%3A57ee5efeb3fcec154609f163%40ODL.MIT.EDU",
+		"responses": [{
+			"itemId": "assessment.Item%3A57ee5efeb3fcec154609f163%40ODL.MIT.EDU",
+			"submissionTime": null,
+			"missingResponse": 0
+		}],
+		"displayElements": [1],
+		"assessmentPartId": "assessment_authoring.AssessmentPart%3A57ee5efeb3fcec154609f167%40ODL.MIT.EDU",
+		"_id": "5802396c57e4750594967c7f"
+	}],
+	"assessmentPartId": "assessment_authoring.AssessmentPart%3A57ee5efeb3fcec154609f167%40ODL.MIT.EDU",
+	"_id": "5802396c57e4750594967c7e"
+}
