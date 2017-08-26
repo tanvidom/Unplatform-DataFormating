@@ -8,11 +8,11 @@ import pdb
 #Function to open new json files in different folders, "array" parameter is passed to the function which contains question ID that is to be found in the assessment items folder.
 def cdToItems(array):
 	global itemsData
-	os.chdir("/home/tdnshah/Unplatform-DataFormating/Item")
+	os.chdir("/home/tdnshah/tools/Unplatform-DataFormating/Item")
 	fileName = array
-#	print fileName
+	print fileName
 	fileExsist = os.path.isfile(fileName)
-#	print fileExsist
+	print fileExsist
 	if fileExsist == True:
 		itemjsonFile = open(fileName)
 		itemsData = json.load(itemjsonFile)		
@@ -28,7 +28,7 @@ print "loveu"
 #for loop for ilterating through each assessmentsection json file in the directory
 for files in glob.glob("*.json"):
 	mergedcsv = open('test.csv','a')
-	os.chdir("/home/tdnshah/Unplatform-DataFormating/assessment/AssessmentSection/")	
+	os.chdir(dir_path1)	
 	dir_path2 = os.path.dirname(os.path.realpath(__file__))
 	print dir_path2	
 #	opens each json files
