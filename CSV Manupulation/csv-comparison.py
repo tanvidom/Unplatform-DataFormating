@@ -1,5 +1,3 @@
-
-
 import json
 import csv
 import os
@@ -29,6 +27,7 @@ print dir_path1
 print "loveu"
 #for loop for ilterating through each assessmentsection json file in the directory
 for files in glob.glob("*.json"):
+	mergedcsv = open('test.csv','a')
 	os.chdir("/home/tdnshah/Unplatform-DataFormating/assessment/AssessmentSection/")	
 	dir_path2 = os.path.dirname(os.path.realpath(__file__))
 	print dir_path2	
@@ -107,4 +106,6 @@ for files in glob.glob("*.json"):
 		except:
 			print "tried but found choices"
 			pass
-		print mainArray
+#		mergedncsv = open('output1.csv','a')
+	writer = csv.writer(mergedcsv)
+	writer.writerow(mainArray)
